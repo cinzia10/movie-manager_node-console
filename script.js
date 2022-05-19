@@ -193,6 +193,15 @@ function modifyElement(){
     properties: {
       index: {
         description: 'Inserire il numero del film che desideri modificare',
+      },
+      title: {
+        description: 'Inserisci il titolo',
+      },
+      genre: {
+        description: 'Inserisci il genere',
+      },
+      yop: {
+        description: 'Inserisci l\'anno di uscita',
       }
     }
   }
@@ -208,7 +217,8 @@ function modifyElementManager(err, result){
   const index = humanIndex - 1;
   const isInArray = index >= 0 && index < elementArray.length;
   if (isInArray){
-    elementArray.splice(index, 1);
+    const movie = new model.Movie(result.title, result.genre, result.yop);
+    elementArray.splice(index, 1, movie);
     saveData(elementArray);
     startMenu();
   } else {
